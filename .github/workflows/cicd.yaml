@@ -16,6 +16,7 @@ jobs:
         shell : bash
         run: |
           echo "COMMIT_ID=${GITHUB_SHA::6}" >> ${GITHUB_ENV}
+          echo ${GITHUB_ENV}
 
       -
         name: Login to Docker Hub
@@ -51,7 +52,7 @@ jobs:
       - name: Commit changes to github  
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Updates charts/python-app/values.yaml with latest commit: ${{needs.ci.outputs.commit_id}}'
+          message: 'Updates charts/python-app/values.yaml with latest commit: ${{ needs.ci.outputs.commit_id }}'
 
       - name: Install Argocd # To run the argocd app sync <application> argocd CLI 
         shell: bash
